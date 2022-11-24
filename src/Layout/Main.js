@@ -5,8 +5,9 @@ import logo from '../assets/logo.svg'
 
 const Main = () => {
      const menuItems = <>
-          <li><Link>Navbar Item 1</Link></li>
-          <li><Link>Navbar Item 2</Link></li>
+          <li><Link>Blog</Link></li>
+          <li><Link to='/login'>Log in</Link></li>
+          <li><Link to='/signup'>Sign up</Link></li>
      </>
      return (
           <div>
@@ -27,19 +28,18 @@ const Main = () => {
                                    </Link>
                               </div>
                               <div className="flex-none hidden lg:block">
-                                   <ul className="menu menu-horizontal font-serif text-sm">
+                                   <ul className="menu menu-horizontal font-serif text-sm uppercase">
                                         {/* <!-- Navbar menu content here --> */}
                                         {menuItems}
                                    </ul>
                               </div>
-                         </div>
-                         {/* <!-- Page content here --> */}
+                         </div>                        
                          <Outlet></Outlet>
                          <Footer></Footer>
                     </div>
                     <div className="drawer-side">
                          <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-                         <ul className="menu p-4 w-80 bg-base-100 font-serif">
+                         <ul className="menu p-4 w-80 bg-base-100 font-serif text-sm uppercase">
                               {menuItems}
                          </ul>
                     </div>
