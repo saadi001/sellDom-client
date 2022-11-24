@@ -1,22 +1,29 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 const Signup = () => {
+     const {register, formState:{errors}, handleSubmit} = useForm();
+
+     const handleSignup = data => {
+          console.log(data)
+     }
      return (
           <div>
                <div class="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
                     <h1 class="text-3xl font-semibold text-center text-gray-700 dark:text-white uppercase font-serif">Sign up</h1>
 
-                    <form className="mt-6">
+                    <form onSubmit={handleSubmit(handleSignup)} className="mt-6">
                          <div>
                               <label for="username" class="block text-sm text-gray-800 dark:text-gray-200">Name<span className='text-red-500'>*</span></label>
-                              <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              <input {...register('name',{required:'Name is required'})} type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              {errors.name && <p className='text-xs text-red-500'>{errors.name?.message}</p>}
                          </div>
 
                          <div className='mt-4'>
                               <label for="username" class="block text-sm text-gray-800 dark:text-gray-200">Options</label>
-                              <select className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
-                                   <option value='user' selected>buyer</option>
+                              <select {...register('option')} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                                   <option value='buyer' selected>buyer</option>
                                    <option value='seller'>seller</option>
                                    
                               </select>
@@ -24,7 +31,8 @@ const Signup = () => {
 
                          <div className='mt-4'>
                               <label for="username" class="block text-sm text-gray-800 dark:text-gray-200">Email<span className='text-red-500'>*</span></label>
-                              <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              <input {...register('email',{required:'Email adress is required'})} type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              {errors.email && <p className='text-xs text-red-500'>{errors.email?.message}</p>}
                          </div>
 
                          <div class="mt-4">
@@ -32,7 +40,8 @@ const Signup = () => {
                                    <label for="password" class="block text-sm text-gray-800 dark:text-gray-200">Password<span className='text-red-500'>*</span></label>
                               </div>
 
-                              <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              <input {...register('password',{required:'Password adress is required', minLength: {value: 6, message: 'password must have at least 6 character.'}})} type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              {errors.password && <p className='text-xs text-red-500'>{errors.password?.message}</p>}
                          </div>
 
                          <div class="mt-6">
