@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Login = () => {
+     const {signIn} = useContext(AuthContext)
+     const [loginError, setLoginError] = useState('')
      const {register, formState:{errors}, handleSubmit} = useForm();
 
-     const handleLogin = data =>{
-          console.log(data)
+     const handleLogin = data =>{          
+          const {email, password} = data;
+          signIn(email, password)
+          .then(result=>{
+               const user = result.user;
+               console.log(user)
+          })
+          .catch(error=>{    
+               console.error(error)           
+               const errMessage = error.message.split('/')[1].slice(0, -1).slice(0, -1);
+               setLoginError(errMessage)
+          })
      }
      return (
           <div>
@@ -17,17 +30,24 @@ const Login = () => {
                          <div>
                               <label for="username" class="block text-sm text-gray-800 dark:text-gray-200">Email<span className='text-red-500'>*</span></label>
                               <input {...register('email',{required:'Email adress is required'})} type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
-                              {errors.email && <p className='text-xs text-red-500'>{errors.email?.message}</p>}
+                              {errors.email && <p className='text-xs text-red-500 flex items-center mt-1'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 mr-[2px]">
+                                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                              </svg>{errors.email?.message}</p>}
                          </div>
 
                          <div class="mt-4">
                               <div class="flex items-center justify-between">
-                                   <label for="password" class="block text-sm text-gray-800 dark:text-gray-200">Password<span className='text-red-500'>*</span></label>
+                                   <label class="block text-sm text-gray-800 dark:text-gray-200">Password<span className='text-red-500'>*</span></label>
                                    <a href="/" class="text-xs text-gray-600 dark:text-gray-400 hover:underline">Forget Password?</a>
                               </div>
 
                               <input {...register('password',{required:'Password is required'})} type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
-                              {errors.password && <p className='text-xs text-red-500'>{errors.password?.message}</p>}
+                              {errors.password && <p className='text-xs text-red-500 flex items-center mt-1'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 mr-[2px]">
+                                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                              </svg>{errors.password?.message}</p>}
+                              {loginError && <p className='text-xs text-red-500 flex items-center mt-1'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 mr-[2px]">
+                                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                              </svg>{loginError}</p>}
                          </div>
 
                          <div class="mt-6">
