@@ -21,7 +21,7 @@ const Main = () => {
                                    </label>
                               </div>
                               <div className="flex-1 px-2 mx-2">
-                                   <Link to='/' className='border-2 flex items-center'>
+                                   <Link to='/' className='flex items-center'>
                                         <div className='h-8 w-8 mr-2'><img className='h-full w-full' src={logo} alt="" /></div>
                                         <p className='text-xl font-serif'>SellDom</p>
                                    </Link>
