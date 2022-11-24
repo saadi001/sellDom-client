@@ -1,16 +1,23 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+     const {register, formState:{errors}, handleSubmit} = useForm()
+
+     const handleLogin = data =>{
+          console.log(data)
+     }
      return (
           <div>
-               <div class="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-                    <h1 class="text-3xl font-semibold text-center text-gray-700 dark:text-white uppercase">Log in</h1>
+               <div class="w-full max-w-sm p-6 my-3 mx-auto bg-white rounded-md shadow-lg dark:bg-gray-800">
+                    <h1 class="text-3xl font-semibold text-center text-gray-700 dark:text-white uppercase font-serif">Log in</h1>
 
-                    <form class="mt-6">
+                    <form onSubmit={handleSubmit(handleLogin)} className="mt-6">
                          <div>
                               <label for="username" class="block text-sm text-gray-800 dark:text-gray-200">Email<span className='text-red-500'>*</span></label>
-                              <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              <input {...register('email',{required:'Email adress is required'})} type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              {errors.email && <p className='text-xs text-red-500'>{errors.email?.message}</p>}
                          </div>
 
                          <div class="mt-4">
@@ -19,12 +26,13 @@ const Login = () => {
                                    <a href="/" class="text-xs text-gray-600 dark:text-gray-400 hover:underline">Forget Password?</a>
                               </div>
 
-                              <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              <input {...register('password',{required:'Password is required'})} type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              {errors.password && <p className='text-xs text-red-500'>{errors.password?.message}</p>}
                          </div>
 
                          <div class="mt-6">
-                              <button class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                                   Login
+                              <button class="w-full px-4 py-2 uppercase tracking-wide text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+                                   Log in
                               </button>
                          </div>
                     </form>

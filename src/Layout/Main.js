@@ -5,7 +5,7 @@ import logo from '../assets/logo.svg'
 
 const Main = () => {
      const menuItems = <>
-          <li><Link>Blog</Link></li>
+          <li><Link to='/blog'>Blog</Link></li>
           <li><Link to='/login'>Log in</Link></li>
           <li><Link to='/signup'>Sign up</Link></li>
      </>
