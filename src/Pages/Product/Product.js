@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import BookingModal from '../../Shared/Modal/BookingModal';
 
 const Product = ({ product }) => {     
+     const [book, setBook] = useState('')
      const { category, product_name, image, location, resale_price, original_price, years_of_use, posted_date, sellers_name, isVerified } = product;
 
      return (
@@ -46,7 +47,7 @@ const Product = ({ product }) => {
                               </ol>
                          </div>
                          <div>
-                              <label htmlFor="booking-modal" className="btn btn-accent mt-4 ml-4">Book now</label>
+                              <label onClick={()=>setBook(product)} htmlFor="booking-modal" className="btn btn-accent mt-4 ml-4">Book now</label>
                          </div>
 
                     </div>
@@ -54,7 +55,8 @@ const Product = ({ product }) => {
                {
                     
                     <BookingModal
-                         product={product}
+                         // product={product}
+                         book={book}
                     ></BookingModal>
                }
           </div>

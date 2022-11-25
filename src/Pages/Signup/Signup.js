@@ -32,8 +32,7 @@ const Signup = () => {
                     })
                     .catch(error=>console.error(error))
                })
-               .catch(error => {
-                    setSignUpError(error.message)
+               .catch(error => {                    
                     console.error(error.message)
                     const errMessage = error.message.split('/')[1].slice(0, -1).slice(0, -1);
                     setSignUpError(errMessage)
