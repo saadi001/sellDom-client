@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import Footer from '../Shared/Footer/Footer';
 import logo from '../assets/logo.svg'
+import { AuthContext } from '../Contexts/AuthProvider';
 
 const Main = () => {
+     const { user,logOut } = useContext(AuthContext)
+
+     const userLogout = () =>{
+          logOut()
+          .then(()=>{})
+          .catch(err=>console.error(err))
+     }
+
      const menuItems = <>
-          <li><Link to='/blog'>Blog</Link></li>
-          <li><Link to='/login'>Log in</Link></li>
-          <li><Link to='/signup'>Sign up</Link></li>
+          <li><Link to='/blog' >Blog</Link></li>
+          {
+               user?.uid ? <><li><p onClick={userLogout}>sing out</p></li></>
+                    :
+                    <>
+                         <li><Link to='/login'>Log in</Link></li>
+                         <li><Link to='/signup'>Sign up</Link></li>
+                    </>
+          }
      </>
      return (
           <div>
@@ -33,7 +48,7 @@ const Main = () => {
                                         {menuItems}
                                    </ul>
                               </div>
-                         </div>                        
+                         </div>
                          <Outlet></Outlet>
                          <Footer></Footer>
                     </div>
