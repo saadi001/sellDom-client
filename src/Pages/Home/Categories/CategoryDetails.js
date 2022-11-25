@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CategoryDetails = ({ category }) => {
-     const { category: categoryID, category_name, image } = category;
+     const { category: categoryID, category_name, image,_id } = category;
      const navigate = useNavigate();
 
      const categoryById = id =>{
@@ -10,7 +10,7 @@ const CategoryDetails = ({ category }) => {
      }
      return (
           <div>
-               <div onClick={()=>categoryById(categoryID)} class="w-full cursor-pointer overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800 border">
+               <div onClick={()=>categoryById(_id)} class="w-full cursor-pointer overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800 border">
                     <img class="object-cover w-full h-56" src={image} alt="category" />
 
                     <div class="py-2 text-center">
