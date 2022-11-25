@@ -2,8 +2,9 @@ import React from 'react';
 import download from '../../assets/Download.svg'
 
 const DownloadApp = () => {
+
      return (
-          <div className='max-w-5xl h-64 mx-auto mt-10 md:flex flex-row items-center  rounded-lg bg-teal-400'>
+          <div className='max-w-5xl max-h-64 md:mx-auto mx-3 mt-10 md:flex flex-row items-center  rounded-lg bg-teal-400 '>
                <div className='h-64 w-1/2 hidden md:block'>
                     <img className='h-full w-full' src={download} alt="" />
                </div>
