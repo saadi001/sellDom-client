@@ -16,7 +16,10 @@ const Main = () => {
      const menuItems = <>
           <li><Link to='/blog' >Blog</Link></li>
           {
-               user?.uid ? <><li><p onClick={userLogout}>sing out</p></li></>
+               user?.uid ? <>
+               <li><Link to='/dashboard'>Dashboard</Link></li>
+               <li><p onClick={userLogout}>sign out</p></li>
+               </>
                     :
                     <>
                          <li><Link to='/login'>Log in</Link></li>

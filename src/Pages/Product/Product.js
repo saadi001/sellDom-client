@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import BookingModal from '../../Shared/Modal/BookingModal';
 
-const Product = ({ product }) => {
+const Product = ({ product }) => {     
      const { category, product_name, image, location, resale_price, original_price, years_of_use, posted_date, sellers_name, isVerified } = product;
+
      return (
           <div className='my-4'>
                <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -28,22 +30,33 @@ const Product = ({ product }) => {
                               </div>
                          </div>
 
-                         <ol className="space-y-4 list-decimal list-inside text-gray-500 dark:text-gray-400 mt-4">
-                              <>
-                                   <p className='text-gray-700 font-semibold'>Details:</p>
-                                   <ul className="pl-5 mt-2 space-y-1 list-disc list-inside">
-                                        <li>Original price: {resale_price}</li>
-                                        <li>Resale price: {original_price}</li>
-                                        <li>Location: {location}</li>
-                                        <li>Used: {years_of_use}</li>
+                         <div>
+                              <ol className="space-y-4 list-decimal list-inside text-gray-500 dark:text-gray-400 mt-4">
+                                   <>
+                                        <p className='text-gray-700 font-semibold'>Details:</p>
+                                        <ul className="pl-5 mt-2 space-y-1 list-disc list-inside">
+                                             <li>resale price: {resale_price}</li>
+                                             <li>original price: {original_price}</li>
+                                             <li>Location: {location}</li>
+                                             <li>Used: {years_of_use}</li>
 
-                                   </ul>
-                              </>
+                                        </ul>
+                                   </>
 
-                         </ol>
+                              </ol>
+                         </div>
+                         <div>
+                              <label htmlFor="booking-modal" className="btn btn-accent mt-4 ml-4">Book now</label>
+                         </div>
 
                     </div>
                </div>
+               {
+                    
+                    <BookingModal
+                         product={product}
+                    ></BookingModal>
+               }
           </div>
      );
 };
