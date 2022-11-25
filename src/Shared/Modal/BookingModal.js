@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const BookingModal = ({product}) => {
-     const {user}= useContext(AuthContext);     
-     const { category, product_name, image, location, resale_price, original_price, years_of_use, posted_date, sellers_name, isVerified } = product;
+     const {user}= useContext(AuthContext);          
 
      return (
           <div>               

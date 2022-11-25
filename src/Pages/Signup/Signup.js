@@ -1,16 +1,20 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Signup = () => {
-     const { user, createUser } = useContext(AuthContext)
+     const {createUser,updateUserProfile } = useContext(AuthContext)
      const [signUpError, setSignUpError] = useState('');
      const { register, formState: { errors }, handleSubmit } = useForm();
+     const location = useLocation();
+     const navigate = useNavigate()
+
+    const from = location.state?.from?.pathname || '/';
 
      const handleSignup = data => {
-          const { name, option, email, password } = data;
+          const { name, role, email, password } = data;
 
           createUser(email, password)
                .then(result => {
@@ -18,6 +22,15 @@ const Signup = () => {
                     console.log(user)
                     setSignUpError('')
                     toast.success('Sign in successful.')
+                    navigate(from, {replace: true})
+                    const userInfo = {
+                         displayName : name
+                    }
+                    updateUserProfile(userInfo)
+                    .then(()=>{
+                         saveUser(name,role,email,password)
+                    })
+                    .catch(error=>console.error(error))
                })
                .catch(error => {
                     setSignUpError(error.message)
@@ -25,6 +38,23 @@ const Signup = () => {
                     const errMessage = error.message.split('/')[1].slice(0, -1).slice(0, -1);
                     setSignUpError(errMessage)
                })
+     }
+
+     const saveUser = (name,role,email,password) =>{
+          const user = {name, role, email, password};
+
+          fetch('http://localhost:5000/users',{
+               method: 'POST',
+               headers: {
+                    'content-type' : 'application/json'
+               },
+               body: JSON.stringify(user)
+          })
+          .then(res => res.json())
+          .then(data =>{
+
+          })
+
      }
      return (
           <div>
@@ -43,7 +73,7 @@ const Signup = () => {
 
                          <div className='mt-4'>
                               <label for="username" class="block text-sm text-gray-800 dark:text-gray-200">Options</label>
-                              <select {...register('option')} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                              <select {...register('role')} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
                                    <option value='buyer' selected>buyer</option>
                                    <option value='seller'>seller</option>
 
