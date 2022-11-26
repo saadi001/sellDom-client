@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
-const BookingModal = ({ book }) => {
-     console.log("book", book)     
+const BookingModal = ({ book,setBook }) => {     
      const { user } = useContext(AuthContext);
      const { register, handleSubmit } = useForm();
+     const navigate = useNavigate()
      const date = new Date()
 
      const handleBooking = (data) =>{
@@ -17,7 +18,8 @@ const BookingModal = ({ book }) => {
                price: book?.resale_price,
                phone: data?.phone,
                location: data?.location,
-               date
+               date,
+               img: book?.image
           }
 
           fetch('http://localhost:5000/bookings',{
@@ -32,6 +34,8 @@ const BookingModal = ({ book }) => {
                console.log(data)
                if(data.acknowledged){
                     toast.success('booking confirmed')
+                    navigate('/dashboard')
+
                }
                else{
                     toast.error(data.message)
@@ -78,7 +82,8 @@ const BookingModal = ({ book }) => {
                                    </div>
                               </div>
                               <div className="modal-action">
-                                   <label htmlFor="booking-modal" className="btn btn-outline">Cancel</label>
+                                   {/* <label htmlFor="booking-modal" className="btn btn-outline">Cancel</label> */}
+                                   <button onClick={()=>setBook(null)} className='btn btn-outline'>Cancel</button>
                                    <button type='submit' className="btn">Book</button>
                               </div>
                          </form>

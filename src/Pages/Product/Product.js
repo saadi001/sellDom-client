@@ -2,7 +2,7 @@ import { useState } from 'react';
 import BookingModal from '../../Shared/Modal/BookingModal';
 
 const Product = ({ product }) => {     
-     const [book, setBook] = useState('')
+     const [book, setBook] = useState(null)
      const { category, product_name, image, location, resale_price, original_price, years_of_use, posted_date, sellers_name, isVerified } = product;
 
      return (
@@ -52,11 +52,12 @@ const Product = ({ product }) => {
 
                     </div>
                </div>
-               {
+               {book && 
                     
                     <BookingModal
                          // product={product}
                          book={book}
+                         setBook={setBook}
                     ></BookingModal>
                }
           </div>
