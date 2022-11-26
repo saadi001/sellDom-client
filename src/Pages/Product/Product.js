@@ -3,7 +3,7 @@ import BookingModal from '../../Shared/Modal/BookingModal';
 
 const Product = ({ product }) => {     
      const [book, setBook] = useState(null)
-     const { category, product_name, image, location, resale_price, original_price, years_of_use, posted_date, sellers_name, isVerified } = product;
+     const { category, product_name, image, location, resale_price, original_price, years_of_use, posted_date, sellers_name, isVerified ,condition} = product;
 
      return (
           <div className='my-4'>
@@ -40,6 +40,9 @@ const Product = ({ product }) => {
                                              <li>original price: {original_price}</li>
                                              <li>Location: {location}</li>
                                              <li>Used: {years_of_use}</li>
+                                             {
+                                                  condition && <li>condition: {condition}</li>
+                                             }
 
                                         </ul>
                                    </>

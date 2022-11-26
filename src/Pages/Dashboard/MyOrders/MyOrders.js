@@ -10,9 +10,9 @@ const MyOrders = () => {
           queryKey: ['bookings', user?.email],
           queryFn: async () => {
                const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`)
-               const data = await res.json()
+               const data = await res.json();
                console.log(data)
-               return data
+               return data;
           }
 
      })
@@ -22,7 +22,7 @@ const MyOrders = () => {
      }
      return (
           <div className='p-2'>
-               <h2 className='text-2xl font-semibold'>My orders</h2>
+               <h2 className='text-2xl font-semibold mb-2'>My orders</h2>
                <div className="overflow-x-auto">
                     <table className="table table-zebra w-full">
 
