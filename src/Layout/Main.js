@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Footer from '../Shared/Footer/Footer';
 import logo from '../assets/logo.svg'
 import { AuthContext } from '../Contexts/AuthProvider';
 
 const Main = () => {
      const { user,logOut } = useContext(AuthContext)
+     const navigate = useNavigate()
 
      const userLogout = () =>{
           logOut()
-          .then(()=>{})
+          .then(()=>{
+               navigate('/login')
+          })
           .catch(err=>console.error(err))
      }
 

@@ -22,7 +22,7 @@ const MyOrders = () => {
      }
      return (
           <div className='p-2'>
-               <h2 className='text-2xl font-semibold mb-2'>My orders</h2>
+               <h2 className='text-xl font-semibold mb-2'>My orders</h2>
                <div className="overflow-x-auto">
                     <table className="table table-zebra w-full">
 

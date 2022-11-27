@@ -43,7 +43,8 @@ const AddProduct = () => {
                          location,
                          sellers_name: user?.displayName,
                          image: imageData.data.url,
-                         posted_date: date
+                         posted_date: date,
+                         sales_status: 'available'
                     }
                     fetch('http://localhost:5000/products',{
                          method: 'POST',
@@ -57,7 +58,7 @@ const AddProduct = () => {
                          console.log(result)
                          setLoading(false)
                          toast.success(`${product_name} added successfully`)
-                         navigate('/dashboard')
+                         navigate('/dashboard/myProducts')
                          
                          
                     })
