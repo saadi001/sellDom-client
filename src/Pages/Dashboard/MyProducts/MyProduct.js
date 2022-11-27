@@ -10,7 +10,7 @@ const MyProduct = () => {
           queryFn: async()=>{
                const res = await fetch(`http://localhost:5000/myProducts?sellers_name=${user?.displayName}`)
                const data = res.json()
-               return data
+               return data;
           }
      })
 
