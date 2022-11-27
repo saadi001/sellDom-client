@@ -6,7 +6,7 @@ import { AuthContext } from '../../../Contexts/AuthProvider';
 
 const AddProduct = () => {
      const { register, formState: { errors }, handleSubmit } = useForm();
-     const { user,loading, setLoading } = useContext(AuthContext);
+     const { user, setLoading } = useContext(AuthContext);
      const navigate = useNavigate()
      let today = new Date();
      let dd = String(today.getDate()).padStart(2, '0');
