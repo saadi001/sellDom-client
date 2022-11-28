@@ -1,19 +1,24 @@
-import { data } from 'autoprefixer';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import useToken from '../../Hooks/useToken/useToken';
 
 const Signup = () => {
      const {createUser,updateUserProfile } = useContext(AuthContext)
      const [signUpError, setSignUpError] = useState('');
      const { register, formState: { errors }, handleSubmit } = useForm();
+     const [createdEmail, setCreatedEmail] = useState('');
+     const [token] = useToken(createdEmail)
      const location = useLocation();
-     const navigate = useNavigate()
+     const navigate = useNavigate();
 
     const from = location.state?.from?.pathname || '/';
 
+    if(token){
+     navigate(from, {replace: true})
+    }
      const handleSignup = data => {
           const { name, role, email, password } = data;
 
@@ -53,21 +58,11 @@ const Signup = () => {
           .then(res => res.json())
           .then(data =>{
                console.log(data)
-               getUserToken(email)
+               setCreatedEmail(email)
           })
 
      }
 
-     const getUserToken = email =>{
-          fetch(`http://localhost:5000/jwt?email=${email}`)
-          .then(res=> res.json())
-          .then(data=>{
-               if(data.accessToken){
-                    localStorage.setItem('accessToken', data.accessToken)
-                    navigate(from, {replace: true})
-               }
-          })
-     }
      return (
           <div>
                <div class="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
