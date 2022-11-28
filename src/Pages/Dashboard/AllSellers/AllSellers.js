@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import Loading from '../../Loading/Loading';
 
 const AllSellers = () => {
-     const { data: allSeller = [],refetch } = useQuery({
+     const { data: allSeller = [],refetch, isLoading } = useQuery({
           queryKey: ["allSellers"],
           queryFn: async () => {
                const res = await fetch('http://localhost:5000/usersByRole?role=seller')
@@ -25,6 +26,10 @@ const AllSellers = () => {
                     }
                })
 
+     }
+
+     if(isLoading){
+          return <Loading></Loading>
      }
 
      return (

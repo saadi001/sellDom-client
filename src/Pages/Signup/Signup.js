@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -22,7 +23,7 @@ const Signup = () => {
                     console.log(user)
                     setSignUpError('')
                     toast.success('Sign in successful.')
-                    navigate(from, {replace: true})
+                    
                     const userInfo = {
                          displayName : name
                     }
@@ -51,9 +52,21 @@ const Signup = () => {
           })
           .then(res => res.json())
           .then(data =>{
-
+               console.log(data)
+               getUserToken(email)
           })
 
+     }
+
+     const getUserToken = email =>{
+          fetch(`http://localhost:5000/jwt?email=${email}`)
+          .then(res=> res.json())
+          .then(data=>{
+               if(data.accessToken){
+                    localStorage.setItem('accessToken', data.accessToken)
+                    navigate(from, {replace: true})
+               }
+          })
      }
      return (
           <div>
