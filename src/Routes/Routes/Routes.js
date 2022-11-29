@@ -12,7 +12,9 @@ import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import NotFound from "../../Pages/NotFound/NotFound";
 import Signup from "../../Pages/Signup/Signup";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 export const router = createBrowserRouter([
      {
@@ -52,19 +54,19 @@ export const router = createBrowserRouter([
                },
                {
                     path: '/dashboard/addProduct',
-                    element: <AddProduct></AddProduct>
+                    element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
                },
                {
                     path: '/dashboard/myProducts',
-                    element: <MyProduct></MyProduct>
+                    element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
                },
                {
                     path: '/dashboard/allBuyers',
-                    element: <AllBuyers></AllBuyers>
+                    element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
                },
                {
                     path: '/dashboard/allSellers',
-                    element: <AllSellers></AllSellers>
+                    element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
                },
                
           ]
