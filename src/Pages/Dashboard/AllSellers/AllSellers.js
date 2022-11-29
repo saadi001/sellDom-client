@@ -28,6 +28,23 @@ const AllSellers = () => {
 
      }
 
+     const handleMakeAdmin = id =>{
+          fetch(`http://localhost:5000/users/admin/${id}`,{
+               method: 'PUT',
+               headers:{
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+               }
+          })
+          .then(res => res.json())
+          .then(data => {
+               if(data.modifiedCount>0){
+                    toast.success('Make admin successful')
+                    refetch()
+               }
+          })
+     }
+
+
      if(isLoading){
           return <Loading></Loading>
      }
@@ -37,13 +54,16 @@ const AllSellers = () => {
                <h2 className='text-xl font-semibold mb-1'>All Sellers</h2>
                {
                     allSeller && allSeller.map(seller => <div className='my-3' key={seller._id}>
-                         <div className='p-3 max-w-md flex justify-between items-center border rounded-lg shadow-xl'>
+                         <div className='p-3 max-w-lg flex justify-between items-center border rounded-lg shadow-xl'>
                               <div className='font-serif'>
                                    <p>{seller?.name}</p>
                                    <p>{seller?.email}</p>
                               </div>
                               <div>
-                                   <button onClick={()=>handleDeleteSeller(seller)} className='btn btn-sm btn-error'>Delete</button>
+                                   <button onClick={()=>handleDeleteSeller(seller)} className='btn btn-sm btn-error mr-2'>Delete</button>
+                                   {seller?.author !== 'admin' ? <button onClick={()=>handleMakeAdmin(seller._id)} className='btn btn-accent btn-sm'>Make admin</button>
+                                        : <button className='btn btn-sm disabled'>Admin</button>     
+                                   }
                               </div>
                          </div>
                     </div>)

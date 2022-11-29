@@ -53,7 +53,7 @@ const AllBuyers = () => {
                     <h2 className='text-xl font-semibold mb-1'>All Buyers</h2>
                     {
                          allBuyer && allBuyer.map(buyer => <div className='my-3' key={buyer._id}>
-                              <div className='p-3 max-w-md flex justify-between items-center border rounded-lg shadow-xl'>
+                              <div className='p-3 max-w-lg flex justify-between items-center border rounded-lg shadow-xl'>
                                    <div className='font-serif'>
                                         <p>{buyer?.name}</p>
                                         <p>{buyer?.email}</p>
