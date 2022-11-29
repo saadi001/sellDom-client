@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 import logo from '../assets/logo.svg'
+import useAdmin from '../Hooks/useAdmin';
 
 
 const DashboardLayout = () => {
      const navigate = useNavigate();
      const { user, logOut } = useContext(AuthContext)
+     const [isAdmin] = useAdmin(user?.email)
      const userLogout = () => {
           logOut()
                .then(() => {
@@ -72,9 +74,13 @@ const DashboardLayout = () => {
                                         <li><Link to='/dashboard'>My Orders</Link></li>
                                         <li><Link to='/dashboard/addProduct'>Add A Product</Link></li>
                                         <li><Link to='/dashboard/myProducts'>My Products</Link></li>
-                                        <li><Link to='/dashboard/allBuyers'>All Buyers</Link></li>
-                                        <li><Link to='/dashboard/allSellers'>All Sellers</Link></li>
-                                        
+                                        {
+                                             isAdmin && <>
+                                                  <li><Link to='/dashboard/allBuyers'>All Buyers</Link></li>
+                                                  <li><Link to='/dashboard/allSellers'>All Sellers</Link></li>
+                                             </>
+                                        }
+
                                    </ul>
 
                               </div>
