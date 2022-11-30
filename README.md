@@ -2,6 +2,10 @@
 
 ### live link: https://selldom-client.web.app/
 
+### admin 
+email: faiaz@gmail.com
+pass: asdfgh
+
 ### project feature:
 
 * Home page: 
