@@ -6,7 +6,7 @@ import Loading from '../../Loading/Loading';
 
 const MyProduct = () => {
      const {user} = useContext(AuthContext)
-     const [advertiseContent, setAdvertiseContent] = useState('Advertise')
+     // const [advertiseContent, setAdvertiseContent] = useState('Advertise')
      const {data:myProduct,refetch, isLoading} = useQuery({
           queryKey: ['myProduct',user?.displayName],
           queryFn: async()=>{
@@ -44,7 +44,7 @@ const MyProduct = () => {
           .then(res => res.json())
           .then(data =>{
                console.log(data)
-               setAdvertiseContent('advertise running')
+               // setAdvertiseContent('advertise running')
           })
 
      }
@@ -83,7 +83,7 @@ const MyProduct = () => {
                                              <td>{product?.sales_status}</td>
                                              <td>{product?.resale_price}</td>
                                              <td><button onClick={()=>handleDeleteProduct(product)}  className='btn btn-sm btn-error'>Delete</button></td>
-                                             <td><button onClick={()=>saveAdvertisement(product)} className='btn btn-sm btn-accent'>{advertiseContent}</button></td>
+                                             <td><button onClick={()=>saveAdvertisement(product)} className='btn btn-sm btn-accent'>Advertise</button></td>
                                         </tr>) : <p className='mt-2 text-center'>No product found</p>
                               }
                               
