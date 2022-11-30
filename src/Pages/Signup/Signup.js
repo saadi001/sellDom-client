@@ -19,6 +19,9 @@ const Signup = () => {
     if(token){
      navigate(from, {replace: true})
     }
+    else{
+     navigate('/login')
+    }
      const handleSignup = data => {
           const { name, role, email, password } = data;
 

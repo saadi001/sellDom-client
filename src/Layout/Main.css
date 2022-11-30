@@ -1,0 +1,5 @@
+.seldom{
+     background: -webkit-linear-gradient(rgb(63, 217, 248), rgb(118, 146, 217));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

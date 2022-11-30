@@ -43,13 +43,34 @@ const Login = () => {
           providerLogin(provider)
           .then(result => {
                const user = result.user;
-               console.log(user)
+               console.log(user)     
+               const role = 'buyer'         
+               saveUser(user?.displayName, role, user?.email, '' )
                navigate(from, {replace: true})
           })
           .catch(error=>{
                console.error(error)
           })
      }
+
+     const saveUser = (name,role,email,password) =>{
+          const user = {name, role, email, password};
+
+          fetch('http://localhost:5000/users',{
+               method: 'POST',
+               headers: {
+                    'content-type' : 'application/json'
+               },
+               body: JSON.stringify(user)
+          })
+          .then(res => res.json())
+          .then(data =>{
+               console.log(data)
+               setLoginEmail(email)
+          })
+
+     }
+     
 
      return (
           <div>

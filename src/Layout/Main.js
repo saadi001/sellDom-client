@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Footer from '../Shared/Footer/Footer';
 import logo from '../assets/logo.svg'
+import './Main.css'
 import { AuthContext } from '../Contexts/AuthProvider';
 
 const Main = () => {
@@ -45,7 +46,7 @@ const Main = () => {
                               <div className="flex-1 px-2 mx-2">
                                    <Link to='/' className='flex items-center'>
                                         <div className='h-8 w-8 mr-2'><img className='h-full w-full' src={logo} alt="" /></div>
-                                        <p className='text-xl font-serif'>SellDom</p>
+                                        <p className='text-xl font-serif seldom'>SellDom</p>
                                    </Link>
                               </div>
                               <div className="flex-none hidden lg:block">
