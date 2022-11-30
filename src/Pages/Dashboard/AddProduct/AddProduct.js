@@ -46,7 +46,7 @@ const AddProduct = () => {
                          posted_date: date,
                          sales_status: 'available'
                     }
-                    fetch('http://localhost:5000/products',{
+                    fetch('https://seldom-server.vercel.app/products',{
                          method: 'POST',
                          headers: {
                               'content-type' : 'application/json'

@@ -7,14 +7,14 @@ const AllBuyers = () => {
      const { data: allBuyer = [], refetch, isLoading } = useQuery({
           queryKey: ["allBuyers"],
           queryFn: async () => {
-               const res = await fetch('http://localhost:5000/usersByRole?role=buyer')
+               const res = await fetch('https://seldom-server.vercel.app/usersByRole?role=buyer')
                const data = res.json()
                return data;
           }
      })
 
      const handleDeleteBuyer = buyer => {
-          fetch(`http://localhost:5000/seller/${buyer._id}`, {
+          fetch(`https://seldom-server.vercel.app/seller/${buyer._id}`, {
                method: 'DELETE',
           })
                .then(res => res.json())
@@ -29,7 +29,7 @@ const AllBuyers = () => {
      }
 
      const handleMakeAdmin = id =>{
-          fetch(`http://localhost:5000/users/admin/${id}`,{
+          fetch(`https://seldom-server.vercel.app/users/admin/${id}`,{
                method: 'PUT',
                headers:{
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -51,7 +51,7 @@ const Signup = () => {
      const saveUser = (name,role,email,password) =>{
           const user = {name, role, email, password};
 
-          fetch('http://localhost:5000/users',{
+          fetch('https://seldom-server.vercel.app/users',{
                method: 'POST',
                headers: {
                     'content-type' : 'application/json'

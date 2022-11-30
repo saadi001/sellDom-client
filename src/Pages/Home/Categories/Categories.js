@@ -8,7 +8,7 @@ const Categories = () => {
           queryKey: ['categories'],
           queryFn: async () => {
                try {
-                    const res = await fetch('http://localhost:5000/categories');
+                    const res = await fetch('https://seldom-server.vercel.app/categories');
                     const data = await res.json()
                     // console.log(data)
                     return data;

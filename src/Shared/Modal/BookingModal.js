@@ -22,7 +22,7 @@ const BookingModal = ({ book,setBook }) => {
                img: book?.image
           }
 
-          fetch('http://localhost:5000/bookings',{
+          fetch('https://seldom-server.vercel.app/bookings',{
                method: 'POST',
                headers: {
                     'content-type' : 'application/json'

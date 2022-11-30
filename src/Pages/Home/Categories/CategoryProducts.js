@@ -11,7 +11,7 @@ const CategoryProducts = () => {
      const { data: products, isLoading } = useQuery({
           queryKey: ['products', category_name],
           queryFn: async () => {
-               const res = await fetch(`http://localhost:5000/products?category=${category_name}`);
+               const res = await fetch(`https://seldom-server.vercel.app/products?category=${category_name}`);
                const data = await res.json();
                return data;
 

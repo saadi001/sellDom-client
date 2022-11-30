@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
                {
                     path: '/category/:id',
                     element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
-                    loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
+                    loader: ({params}) => fetch(`https://seldom-server.vercel.app/categories/${params.id}`)
                }
           ]
      },

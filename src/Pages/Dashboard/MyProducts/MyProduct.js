@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useContext,  } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import Loading from '../../Loading/Loading';
@@ -10,14 +10,14 @@ const MyProduct = () => {
      const {data:myProduct,refetch, isLoading} = useQuery({
           queryKey: ['myProduct',user?.displayName],
           queryFn: async()=>{
-               const res = await fetch(`http://localhost:5000/myProducts?sellers_name=${user?.displayName}`)
+               const res = await fetch(`https://seldom-server.vercel.app/myProducts?sellers_name=${user?.displayName}`)
                const data =await res.json()
                return data;
           }
      })
 
      const handleDeleteProduct = product => {
-          fetch(`http://localhost:5000/myProducts/${product._id}`,{
+          fetch(`https://seldom-server.vercel.app/myProducts/${product._id}`,{
                method: 'DELETE',               
           })
           .then(res => res.json())
@@ -34,7 +34,7 @@ const MyProduct = () => {
      const saveAdvertisement = product =>{
           const {image, product_name, resale_price} = product;
           const adProduct = {image,product_name,resale_price}
-          fetch('http://localhost:5000/advertise',{
+          fetch('https://seldom-server.vercel.app/advertise',{
                method: 'POST',
                headers: {
                     'content-type' : 'application/json'
