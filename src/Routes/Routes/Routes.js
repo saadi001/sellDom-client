@@ -54,11 +54,11 @@ export const router = createBrowserRouter([
                },
                {
                     path: '/dashboard/addProduct',
-                    element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+                    element: <AddProduct></AddProduct>
                },
                {
                     path: '/dashboard/myProducts',
-                    element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
+                    element: <MyProduct></MyProduct>
                },
                {
                     path: '/dashboard/allBuyers',

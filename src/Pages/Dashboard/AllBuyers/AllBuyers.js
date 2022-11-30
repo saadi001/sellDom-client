@@ -52,7 +52,7 @@ const AllBuyers = () => {
                <div className='p-2'>
                     <h2 className='text-xl font-semibold mb-1'>All Buyers</h2>
                     {
-                         allBuyer && allBuyer.map(buyer => <div className='my-3' key={buyer._id}>
+                         allBuyer ? allBuyer.map(buyer => <div className='my-3' key={buyer._id}>
                               <div className='p-3 max-w-lg flex justify-between items-center border rounded-lg shadow-xl'>
                                    <div className='font-serif'>
                                         <p>{buyer?.name}</p>
@@ -65,7 +65,7 @@ const AllBuyers = () => {
                                    }
                                    </div>
                               </div>
-                         </div>)
+                         </div>): <p className='text-center'>No Buyer found</p>
                     }
                </div>
           </div>

@@ -1,15 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Contexts/AuthProvider';
+import Loading from '../../Loading/Loading';
 
 const MyProduct = () => {
      const {user} = useContext(AuthContext)
-     const {data:myProduct,refetch} = useQuery({
+     const [advertiseContent, setAdvertiseContent] = useState('Advertise')
+     const {data:myProduct,refetch, isLoading} = useQuery({
           queryKey: ['myProduct',user?.displayName],
           queryFn: async()=>{
                const res = await fetch(`http://localhost:5000/myProducts?sellers_name=${user?.displayName}`)
-               const data = res.json()
+               const data =await res.json()
                return data;
           }
      })
@@ -27,6 +29,28 @@ const MyProduct = () => {
                }
           })
 
+     }
+
+     const saveAdvertisement = product =>{
+          const {image, product_name, resale_price} = product;
+          const adProduct = {image,product_name,resale_price}
+          fetch('http://localhost:5000/advertise',{
+               method: 'POST',
+               headers: {
+                    'content-type' : 'application/json'
+               },
+               body: JSON.stringify(adProduct)
+          })
+          .then(res => res.json())
+          .then(data =>{
+               console.log(data)
+               setAdvertiseContent('advertise running')
+          })
+
+     }
+
+     if(isLoading){
+          return <Loading></Loading>
      }
      return (
           <div className='p-2'>
@@ -59,7 +83,7 @@ const MyProduct = () => {
                                              <td>{product?.sales_status}</td>
                                              <td>{product?.resale_price}</td>
                                              <td><button onClick={()=>handleDeleteProduct(product)}  className='btn btn-sm btn-error'>Delete</button></td>
-                                             <td><button className='btn btn-sm btn-accent'>Advertise</button></td>
+                                             <td><button onClick={()=>saveAdvertisement(product)} className='btn btn-sm btn-accent'>{advertiseContent}</button></td>
                                         </tr>) : <p className='mt-2 text-center'>No product found</p>
                               }
                               

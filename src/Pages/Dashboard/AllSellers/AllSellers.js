@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import Loading from '../../Loading/Loading';
 
 const AllSellers = () => {
-     const { data: allSeller = [],refetch, isLoading } = useQuery({
+     const { data: allSeller ,refetch, isLoading } = useQuery({
           queryKey: ["allSellers"],
           queryFn: async () => {
                const res = await fetch('http://localhost:5000/usersByRole?role=seller')
@@ -53,7 +53,7 @@ const AllSellers = () => {
           <div className='p-2'>
                <h2 className='text-xl font-semibold mb-1'>All Sellers</h2>
                {
-                    allSeller && allSeller.map(seller => <div className='my-3' key={seller._id}>
+                    allSeller ? allSeller.map(seller => <div className='my-3' key={seller._id}>
                          <div className='p-3 max-w-lg flex justify-between items-center border rounded-lg shadow-xl'>
                               <div className='font-serif'>
                                    <p>{seller?.name}</p>
@@ -66,7 +66,7 @@ const AllSellers = () => {
                                    }
                               </div>
                          </div>
-                    </div>)
+                    </div>):<p className='text-center'>No seller found</p>
                }
           </div>
      );

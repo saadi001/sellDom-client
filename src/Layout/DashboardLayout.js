@@ -9,7 +9,7 @@ import useSeller from '../Hooks/useSeller';
 const DashboardLayout = () => {
      const navigate = useNavigate();
      const { user, logOut } = useContext(AuthContext)
-     const [isSeller] = useSeller(user?.email)
+     // const [isSeller] = useSeller(user?.email)
      const [isAdmin] = useAdmin(user?.email)
      const userLogout = () => {
           logOut()
@@ -74,12 +74,12 @@ const DashboardLayout = () => {
                                    <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                                    <ul className="menu p-4 w-80 bg-base-100 text-base-content">
                                         <li><Link to='/dashboard'>My Orders</Link></li>
-                                        {
-                                             isSeller && <>
+                                        {/* {
+                                             isSeller && <> */}
                                                   <li><Link to='/dashboard/addProduct'>Add A Product</Link></li>
                                                   <li><Link to='/dashboard/myProducts'>My Products</Link></li>
-                                             </>
-                                        }
+                                             {/* </>
+                                        } */}
                                         {
                                              isAdmin && <>
                                                   <li><Link to='/dashboard/allBuyers'>All Buyers</Link></li>
