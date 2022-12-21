@@ -7,9 +7,9 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import useToken from '../../Hooks/useToken/useToken';
 
 const Login = () => {
-     const {signIn,providerLogin} = useContext(AuthContext)
+     const { signIn, providerLogin } = useContext(AuthContext)
      const [loginError, setLoginError] = useState('')
-     const {register, formState:{errors}, handleSubmit} = useForm();
+     const { register, formState: { errors }, handleSubmit } = useForm();
      const provider = new GoogleAuthProvider()
      const [loginEmail, setLoginEmail] = useState('')
      const [token] = useToken(loginEmail)
@@ -18,59 +18,59 @@ const Login = () => {
 
      const from = location.state?.from?.pathname || '/';
 
-     if(token){
-          navigate(from, {replace: true})
-     }     
+     if (token) {
+          navigate(from, { replace: true })
+     }
 
-     const handleLogin = data =>{          
-          const {email, password} = data;
+     const handleLogin = data => {
+          const { email, password } = data;
           signIn(email, password)
-          .then(result=>{
-               const user = result.user;
-               console.log(user)
-               toast.success('sign in successfully')
-               setLoginEmail(email)
-               
-          })
-          .catch(error=>{    
-               console.error(error)           
-               const errMessage = error.message.split('/')[1].slice(0, -1).slice(0, -1);
-               setLoginError(errMessage)
-          })
+               .then(result => {
+                    const user = result.user;
+                    console.log(user)
+                    toast.success('sign in successfully')
+                    setLoginEmail(email)
+
+               })
+               .catch(error => {
+                    console.error(error)
+                    const errMessage = error.message.split('/')[1].slice(0, -1).slice(0, -1);
+                    setLoginError(errMessage)
+               })
      }
 
-     const googlePopupLogin = (provider) =>{
+     const googlePopupLogin = (provider) => {
           providerLogin(provider)
-          .then(result => {
-               const user = result.user;
-               console.log(user)     
-               const role = 'buyer'         
-               saveUser(user?.displayName, role, user?.email, '' )
-               navigate(from, {replace: true})
-          })
-          .catch(error=>{
-               console.error(error)
-          })
+               .then(result => {
+                    const user = result.user;
+                    console.log(user)
+                    const role = 'buyer'
+                    saveUser(user?.displayName, role, user?.email, '')
+                    navigate(from, { replace: true })
+               })
+               .catch(error => {
+                    console.error(error)
+               })
      }
 
-     const saveUser = (name,role,email,password) =>{
-          const user = {name, role, email, password};
+     const saveUser = (name, role, email, password) => {
+          const user = { name, role, email, password };
 
-          fetch('https://seldom-server.vercel.app/users',{
+          fetch('https://seldom-server.vercel.app/users', {
                method: 'POST',
                headers: {
-                    'content-type' : 'application/json'
+                    'content-type': 'application/json'
                },
                body: JSON.stringify(user)
           })
-          .then(res => res.json())
-          .then(data =>{
-               console.log(data)
-               setLoginEmail(email)
-          })
+               .then(res => res.json())
+               .then(data => {
+                    console.log(data)
+                    setLoginEmail(email)
+               })
 
      }
-     
+
 
      return (
           <div>
@@ -80,7 +80,7 @@ const Login = () => {
                     <form onSubmit={handleSubmit(handleLogin)} className="mt-6">
                          <div>
                               <label className="block text-sm text-gray-800 dark:text-gray-200">Email<span className='text-red-500'>*</span></label>
-                              <input {...register('email',{required:'Email adress is required'})} type="email" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              <input {...register('email', { required: 'Email adress is required' })} type="email" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
                               {errors.email && <p className='text-xs text-red-500 flex items-center mt-1'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-3 h-3 mr-[2px]">
                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                               </svg>{errors.email?.message}</p>}
@@ -92,7 +92,7 @@ const Login = () => {
                                    <a href="/" className="text-xs text-gray-600 dark:text-gray-400 hover:underline">Forget Password?</a>
                               </div>
 
-                              <input {...register('password',{required:'Password is required'})} type="password" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                              <input {...register('password', { required: 'Password is required' })} type="password" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
                               {errors.password && <p className='text-xs text-red-500 flex items-center mt-1'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-3 h-3 mr-[2px]">
                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                               </svg>{errors.password?.message}</p>}
@@ -118,8 +118,8 @@ const Login = () => {
                          <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
                     </div>
 
-                    <div onClick={()=>googlePopupLogin(provider)} className="flex items-center mt-6 -mx-2">
-                         <button  type="button" className="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400 focus:outline-none">
+                    <div onClick={() => googlePopupLogin(provider)} className="flex items-center mt-6 -mx-2">
+                         <button type="button" className="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400 focus:outline-none">
                               <svg className="w-4 h-4 mx-2 fill-current" viewBox="0 0 24 24">
                                    <path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z">
                                    </path>
@@ -127,10 +127,17 @@ const Login = () => {
 
                               <span className="hidden mx-2 sm:inline">Sign in with Google</span>
                          </button>
-                         
+
                     </div>
 
                     <p className="mt-8 text-xs font-light text-center text-gray-400"> Don't have an account? <Link to='/signup' className="font-medium text-gray-700 dark:text-gray-200 hover:underline">Create One</Link></p>
+               </div>
+               <div className=' text-gray-400 text-sm max-w-sm mx-auto'>
+                    <div>
+                         <p className='text-gray-500'>recommendation*</p>
+                         <p>user: seller1@gmail.com pass: asdfgh</p>
+                         <p>admin: faiaz@gmail.com <span>pass:</span> asdfgh</p>
+                    </div>
                </div>
           </div>
      );

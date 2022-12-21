@@ -7,7 +7,7 @@ const Blog = () => {
      return (
           <div className='max-w-5xl mx-auto '>
                <p className='text-center text-xl font-serif font-semibold my-3 underline'>Blogs</p>
-               <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5'>
+               <div className='grid gap-4 grid-cols-1 md:grid-cols-2 my-5'>
                     <div className='border shadow-xl p-2 rounded-md mx-2'>
                          <ReactReadMoreReadLess
                               charLimit={200}
